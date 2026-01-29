@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sprite Sheet Measurement</title>
+</head>
+<body>
+    <h2>Sonic Sprite Sheet Analysis</h2>
+    <canvas id="canvas" style="border: 1px solid black"></canvas>
+    <div id="info"></div>
+
+    <script>
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            const info = document.getElementById('info');
+            info.innerHTML = `
+                <p><strong>Total Image Size:</strong> ${img.width} x ${img.height} pixels</p>
+                <p><strong>Width per frame (÷12):</strong> ${img.width / 12} pixels</p>
+                <p><strong>Width per frame (÷8):</strong> ${img.width / 8} pixels</p>
+                <p><strong>Width per frame (÷16):</strong> ${img.width / 16} pixels</p>
+                <p><strong>Height:</strong> ${img.height} pixels</p>
+                <p><strong>Recommended settings:</strong></p>
+                <ul>
+                    <li>xstart: 0</li>
+                    <li>yStart: 0</li>
+                    <li>width: ${img.width / 12}</li>
+                    <li>height: ${img.height}</li>
+                    <li>frameCount: 12 (or adjust based on actual frames)</li>
+                </ul>
+            `;
+        };
+        img.src = 'sonic.png';
+    </script>
+</body>
+</html>
